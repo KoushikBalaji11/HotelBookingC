@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+struct book {
+    long int num;
+    char name[20],days[20],choice;
+};
+
+
+void booking(){
+    FILE *fp;
+	struct book b;
+	printf(" Enter Your Name : "); 	
+	scanf("%s",b.name);
+	printf("Enter The Number Of Staying Days : ");	
+	scanf("%s",b.days);
+	
+	
+	printf("Enter Your Hotel Choice : ");	
+	scanf("%s",&b.choice);
+	printf("Enter Your Phone Number : ");	
+	scanf("%ld",&b.num);
+	fp=fopen("data.txt","a");
+
+	if(fp == NULL)
+	{
+		printf("File not Found");
+	}
+	else
+	{
+		fprintf(fp," Name:%s\n Days:%s\n Hotel Choice:%c\n Number:%ld\n \n",b.name,b.days,b.choice,b.num);
+		printf("Booking Sucessfull");
+	}
+		printf("\n");
+	fclose(fp);
+    
+}
+void cancelling(){
+ struct book b;
+    FILE *fp;
+    remove("data.txt");
+    printf("The Record Has Been Deleted Or Not Found");
+
+}
+           
+
+void viewin()
+{
+	struct book b;
+	char ch,sname[20];
+	long int noo;
+	char c[256];
+	FILE *fp;
+
+	fp = fopen("data.txt","r");
+	if(fp == NULL)
+	{
+		printf("file not found !");
+	}
+	else
+	{
+		ch = fgetc(fp); 
+    while (ch != EOF) 
+    { 
+		printf ("%c", ch); 
+        ch = fgetc(fp);
+
+			}
+				
+		}		
+       
+		
+	fclose(fp);
+	
+}  
+
+
+int main(){
+    int h;
+    int ch,x=0;
+   do{ printf("\n====================================================================");
+	printf("\n");	
+	printf("\t Hotel Stay booking ");
+	printf("\n");
+	printf("\n====================================================================");
+printf("\nChoose Your Hotel :");
+printf("\n\t Lake View Resort \t\tTwilight Villa \t\tThe Travelogue  ");
+printf("\nChoice   (A)\t\t\t\t(B)\t\t\t\t(C)");
+printf("\nPrice    4000\t\t\t\t3000\t\t\t\t1700");	
+printf("\nRating   4.3 \t\t\t\t3.9\t\t\t\t4.7");
+if(x==0){printf("\n\nPress <1> Book your stay");}
+	printf("\nPress <2> View Booking ");
+	printf("\nPress <3> Cancel Booking");
+	
+   	printf("\nPress <0> Exit\n ");
+   	scanf("%d",&ch);
+	
+   	if(ch==1){
+    		if(x==0){
+    		booking();
+    		x++;}
+    		else{
+    			printf("%s","Booking Has Already Been Done, Kindly Choose Other Options" );
+    		}}
+    else if(ch==2){
+    		viewin();}
+   		
+
+	else if (ch==3){
+		    cancelling();
+
+		    x=0;
+		}
+	else {
+	    if(ch!=0)
+	    printf("Choose A Valid Option");
+	}}while(ch!=0);
+	printf("Thank You! Your Booking Has Been Confirmed\n");
+    remove("data.txt");
+    return(0);
+   	}
